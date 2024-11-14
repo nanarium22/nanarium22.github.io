@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>gimmick</title>
+  
+  <p>tap</p>
+  <style>
+
+    .icon {
+      width: 50px;
+      height: 50px;
+      background-color: orange;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      color: white;
+      font-size: 10px;
+      margin-right: auto;
+      margin-left: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="icon" id="tapIcon">tap</div>
+
+  <script>
+    let tapCount = 0;
+
+    document.getElementById("tapIcon").addEventListener("click", function() {
+      tapCount++;
+
+      if (tapCount >= 5) {
+        window.location.href = "/Users/iguchinanaka/projects/first/gimmick2.html"; 
+      }
+    });
+  </script>
+</body>
+
+<p>DnD</p>
+<style>
+  .box-one {
+    width: 50px;
+    height: 50px;
+    background-color: orange;
+    border-radius: 50%;
+    cursor: grab;
+    margin: 20px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .object {
+    width: 50px;
+    height: 50px;
+    background-color: orange;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+    font-size: 10px;
+    user-select: none;
+    text-align: center;
+    margin: 20px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .box-two {
+    width: 50px;
+    height: 50px;
+    background-color: green;
+    border-radius: 50%;
+    cursor: grab;
+    margin: 20px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+</style>
+</head>
+<body>
+
+<div class="box-one">
+  <div class="object" id="Object" draggable="true">DnD</div>
+</div>
+
+<div class="box-two" id="boxTwo"></div>
+
+<script>
+  const Object = document.getElementById("Object");
+  const boxTwo = document.getElementById("boxTwo");
+
+
+  Object.addEventListener("dragstart", function(event) {
+    event.dataTransfer.setData("text/plain", "Object");
+  });
+
+  boxTwo.addEventListener("dragover", function(event) {
+    event.preventDefault(); 
+  });
+
+  boxTwo.addEventListener("drop", function(event) {
+    event.preventDefault();
+    const data = event.dataTransfer.getData("text/plain");
+
+    if (data === "Object") {
+      window.location.href = "/Users/iguchinanaka/projects/first/gimmick2.html";
+    }
+  });
+</script>
+
+</body>
+
+<p>press</p>
+<style>
+  .circle {
+    width: 50px;
+    height: 50px;
+    background-color: orange;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+    font-size: 10px;
+    user-select: none;
+    text-align: center;
+    margin: 20px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+</style>
+</head>
+<body>
+
+<div class="circle" id="Circle">press</div>
+
+<script>
+  const blueCircle = document.getElementById("Circle");
+  let pressTimer;
+
+  function startLongPress() {
+    pressTimer = setTimeout(function() {
+      window.location.href = "/Users/iguchinanaka/projects/first/gimmick2.html"; 
+    }, 2000);
+  }
+
+  function cancelLongPress() {
+    clearTimeout(pressTimer); 
+  }
+
+  // マウス操作イベント
+  Circle.addEventListener("mousedown", startLongPress);
+  Circle.addEventListener("mouseup", cancelLongPress);
+  Circle.addEventListener("mouseleave", cancelLongPress);
+
+  // タッチデバイスイベント
+  Circle.addEventListener("touchstart", startLongPress);
+  Circle.addEventListener("touchend", cancelLongPress);
+  Circle.addEventListener("touchcancel", cancelLongPress);
+</script>
+
+</body>
+
+<p>DnD12345</p>
+ <style>
+    .start-area {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .draggable-circle {
+      width: 50px;
+      height: 50px;
+      background-color: orange;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    .drop-area {
+      display: flex;
+      gap: 10px;
+    }
+
+    .drop-circle {
+      width: 50px;
+      height: 50px;
+      background-color: green;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-weight: bold;
+      margin-right: auto;
+      margin-left: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="start-area">
+    <div class="draggable-circle" draggable="true" id="circle1">1</div>
+    <div class="draggable-circle" draggable="true" id="circle2">2</div>
+    <div class="draggable-circle" draggable="true" id="circle3">3</div>
+    <div class="draggable-circle" draggable="true" id="circle4">4</div>
+    <div class="draggable-circle" draggable="true" id="circle5">5</div>
+  </div>
+
+  <div class="drop-area">
+    <div class="drop-circle" id="target1">1</div>
+    <div class="drop-circle" id="target2">2</div>
+    <div class="drop-circle" id="target3">3</div>
+    <div class="drop-circle" id="target4">4</div>
+    <div class="drop-circle" id="target5">5</div>
+  </div>
+
+  <script>
+    const draggableCircles = document.querySelectorAll(".draggable-circle");
+    const dropCircles = document.querySelectorAll(".drop-circle");
+
+    draggableCircles.forEach(circle => {
+      circle.addEventListener("dragstart", function(event) {
+        event.target.style.opacity = "0"; 
+        event.dataTransfer.setData("text", event.target.id); 
+      });
+
+      circle.addEventListener("dragend", function(event) {
+        event.target.style.opacity = "1"; 
+      });
+    });
+
+    dropCircles.forEach(target => {
+      target.addEventListener("dragover", function(event) {
+        event.preventDefault(); 
+      });
+
+      target.addEventListener("drop", function(event) {
+        event.preventDefault();
+        
+        const draggedId = event.dataTransfer.getData("text"); 
+        const draggedElement = document.getElementById(draggedId);
+
+        if (draggedElement && draggedElement.textContent === target.textContent) {
+          target.style.backgroundColor = "orange"; 
+          draggedElement.style.visibility = "hidden"; 
+
+          const allDropped = Array.from(dropCircles).every(circle => circle.style.backgroundColor === "orange");
+
+          if (allDropped) {
+            window.location.href = "/Users/iguchinanaka/projects/first/gimmick2.html"; // 遷移先のURL
+          }
+        }
+      });
+    });
+  </script>
+
+</body>
